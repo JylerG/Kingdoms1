@@ -37,3 +37,22 @@ commands:
     aliases: [c]
   rank:
     description: Set a player's rank.
+    aliases: []
+  nick:
+    description: Nickname yourself.
+    aliases: [nickname]
+  merchant:
+    description: Select which items you can and can't sell to the Merchant.
+    aliases: []
+  gmc:
+    description: Set your gamemode to Creative.
+    aliases: []
+  gma:
+    description: Set your gamemode to Adventure.
+    aliases: []
+  gms:
+    description: Set your gamemode to Survival.
+    aliases: []
+  gmsp:
+    description: Set your gamemode to Spectator.
+    aliases: []

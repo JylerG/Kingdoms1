@@ -21,17 +21,17 @@ public class VanishCMD implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (p.hasPermission("kingdoms.vanish")) {
-                if (plugin.invisiblePlayers.contains(p)) {
+                if (plugin.getInvisiblePlayers().contains(p)) {
                     for (Player online_players : Bukkit.getOnlinePlayers()) {
                         online_players.showPlayer(plugin, p);
                     }
-                    plugin.invisiblePlayers.remove(p);
+                    plugin.getInvisiblePlayers().remove(p);
                     p.sendMessage("§6Vanish §cdisabled");
-                } else if (!plugin.invisiblePlayers.contains(p)) {
+                } else if (!plugin.getInvisiblePlayers().contains(p)) {
                     for (Player online_players : Bukkit.getOnlinePlayers()) {
                         online_players.hidePlayer(plugin, p);
                     }
-                    plugin.invisiblePlayers.add(p);
+                    plugin.getInvisiblePlayers().add(p);
                     p.sendMessage("§6Vanish §aenabled");
                 }
             }

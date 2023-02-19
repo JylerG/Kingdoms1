@@ -28,72 +28,92 @@ public class RankCMD implements CommandExecutor {
                 case 2:
                     if (player.hasPermission("kingdoms.setrank.default") || player.hasPermission("kingdoms.setrank.vip") || player.hasPermission("kingdoms.setrank.hero") || player.hasPermission("kingdoms.setrank.jrmod") || player.hasPermission("kingdoms.setrank.mod") || player.hasPermission("kingdoms.setrank.srmod") || player.hasPermission("kingdoms.setrank.jradmin") || player.isOp()) {
                         player.sendMessage(ChatColor.GOLD + "Usage: /rank set <player> <rank>");
+                        return true;
                     }
                     break;
                     case 3:
                         Player target = Bukkit.getPlayer(args[1]);
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("default") && player.hasPermission("kingdoms.setrank.default") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + Rank.DEFAULT) || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "JRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.YELLOW.toString() + ChatColor.BOLD + "MOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
+                        if (target == null) {
+                            player.sendMessage(ChatColor.WHITE + args[1] + ChatColor.RED + " is not online");
+                            return true;
+                        }
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("default") && player.hasPermission("kingdoms.setrank.default")) {
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + Rank.DEFAULT);
+                            plugin.getStaff().remove(target.getUniqueId().toString());
+                            plugin.saveStaff();
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.DARK_GRAY + ChatColor.BOLD + Rank.DEFAULT);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.DARK_GRAY + ChatColor.BOLD + Rank.DEFAULT);
-                        } if (target == null) {
-                        player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + args[1] + ChatColor.RED + ChatColor.BOLD + " is not online");
-                    }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("vip") && player.hasPermission("kingdoms.setrank.vip") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GREEN.toString() + ChatColor.BOLD + "VIP") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.YELLOW.toString() + ChatColor.BOLD + "MOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.DARK_GRAY + Rank.DEFAULT);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.DARK_GRAY + Rank.DEFAULT);
+                            return true;
+                        }
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("vip") && player.hasPermission("kingdoms.setrank.vip")) {
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.GREEN.toString() + ChatColor.BOLD + Rank.VIP);
+                            plugin.getStaff().remove(target.getUniqueId().toString());
+                            plugin.saveStaff();
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.GREEN + ChatColor.BOLD + Rank.VIP);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.GREEN + ChatColor.BOLD + Rank.VIP);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.GREEN + Rank.VIP);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.GREEN + Rank.VIP);
+                            return true;
                         }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("hero") && player.hasPermission("kingdoms.setrank.hero") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.AQUA.toString() + ChatColor.BOLD + "HERO") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.YELLOW.toString() + ChatColor.BOLD + "MOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("hero") && player.hasPermission("kingdoms.setrank.hero")) {
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.AQUA.toString() + ChatColor.BOLD + Rank.HERO);
+                            plugin.getStaff().remove(target.getUniqueId().toString());
+                            plugin.saveStaff();
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.AQUA + ChatColor.BOLD + Rank.HERO);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.AQUA + ChatColor.BOLD + Rank.HERO);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.AQUA + Rank.HERO);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.AQUA + Rank.HERO);
+                            return true;
                         }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("jrmod") && player.hasPermission("kingdoms.setrank.jrmod") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "JRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.YELLOW.toString() + ChatColor.BOLD + "MOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
-                            plugin.getStaff().put(target.getUniqueId().toString(), "jrmod");
-                            plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + Rank.JRMOD);
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("youtube") && player.hasPermission("kingdoms.setrank.youtube")) {
+                            plugin.getPlayerRank().put(target.getUniqueId().toString(), Rank.YOUTUBE.getColor().toString() + ChatColor.BOLD + Rank.YOUTUBE.getName() + Rank.YOUTUBE.getSecondaryColor() + ChatColor.BOLD + Rank.YOUTUBE.getSecondaryName());
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.DARK_AQUA + ChatColor.BOLD + Rank.JRMOD);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.DARK_AQUA + ChatColor.BOLD + Rank.JRMOD);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + Rank.YOUTUBE.getColor() + Rank.YOUTUBE.getName() + Rank.YOUTUBE.getSecondaryColor() + Rank.YOUTUBE.getSecondaryName());
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + Rank.YOUTUBE.getColor() + Rank.YOUTUBE.getName() + Rank.YOUTUBE.getSecondaryColor() + Rank.YOUTUBE.getSecondaryName());
+                            return true;
                         }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("mod") && player.hasPermission("kingdoms.setrank.mod") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.YELLOW.toString() + ChatColor.BOLD + "MOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
-                            plugin.getStaff().put(target.getUniqueId().toString(), "mod");
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("jrmod") && player.hasPermission("kingdoms.setrank.jrmod")) {
+                        plugin.getStaff().put(target.getUniqueId().toString(), "jrmod");
+                        plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + Rank.JRMOD);
+                        plugin.savePlayerRank();
+                        target.setOp(false);
+                        player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.DARK_AQUA + Rank.JRMOD);
+                        target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.DARK_AQUA + Rank.JRMOD);
+                        }
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("mod") && player.hasPermission("kingdoms.setrank.mod")) {
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.YELLOW.toString() + ChatColor.BOLD + Rank.MOD);
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.YELLOW + ChatColor.BOLD + Rank.MOD);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.YELLOW + ChatColor.BOLD + Rank.MOD);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.YELLOW + Rank.MOD);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.YELLOW + Rank.MOD);
+                            return true;
                         }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("srmod") && player.hasPermission("kingdom.setrank.srmod") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.GOLD.toString() + ChatColor.BOLD + "SRMOD") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("srmod") && player.hasPermission("kingdom.setrank.srmod")) {
                             plugin.getStaff().put(target.getUniqueId().toString(), "srmod");
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.GOLD.toString() + ChatColor.BOLD + Rank.SRMOD);
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.GOLD + ChatColor.BOLD + Rank.SRMOD);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.GOLD + ChatColor.BOLD + Rank.SRMOD);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.GOLD + Rank.SRMOD);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.GOLD + Rank.SRMOD);
                         }
-                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("jradmin") && player.hasPermission("kingdoms.setrank.jradmin") && (!plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "ADMIN") || !plugin.getPlayerRank().get(target.getUniqueId().toString()).equalsIgnoreCase(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "JRADMIN"))) {
+                        if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("jradmin") && player.hasPermission("kingdoms.setrank.jradmin")) {
                             plugin.getStaff().put(target.getUniqueId().toString(), "jradmin");
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.DARK_RED.toString() + ChatColor.BOLD + Rank.JRADMIN);
                             plugin.savePlayerRank();
                             target.setOp(false);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.DARK_RED + ChatColor.BOLD + Rank.JRADMIN);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.DARK_RED + ChatColor.BOLD + Rank.JRADMIN);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.DARK_RED + Rank.JRADMIN);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.DARK_RED + Rank.JRADMIN);
                         }
                         if (args[0].equalsIgnoreCase("set") && target != null && args[2].equalsIgnoreCase("admin") && player.hasPermission("kingdoms.setrank.admin")) {
                             plugin.getStaff().put(target.getUniqueId().toString(), "admin");
                             plugin.getPlayerRank().put(target.getUniqueId().toString(), ChatColor.DARK_RED.toString() + ChatColor.BOLD + Rank.ADMIN);
                             plugin.savePlayerRank();
                             target.setOp(true);
-                            player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "You set " + ChatColor.WHITE + ChatColor.BOLD + target.getDisplayName() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "'s rank to " + ChatColor.DARK_RED + ChatColor.BOLD + Rank.ADMIN);
-                            target.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Your rank has been set to " + ChatColor.DARK_RED + ChatColor.BOLD + Rank.ADMIN);
+                            player.sendMessage(ChatColor.LIGHT_PURPLE + "You set " + ChatColor.WHITE + target.getDisplayName() + ChatColor.LIGHT_PURPLE + "'s rank to " + ChatColor.DARK_RED + Rank.ADMIN);
+                            target.sendMessage(ChatColor.LIGHT_PURPLE + "Your rank has been set to " + ChatColor.DARK_RED + Rank.ADMIN);
                         }
                     break;
             }

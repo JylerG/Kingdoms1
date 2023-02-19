@@ -29,15 +29,15 @@ public class Fly implements CommandExecutor {
         if (player.hasPermission("kingdoms.fly")) {
             if (list_of_flying_people.contains(player)) {
                 list_of_flying_people.remove(player);
-                player.sendMessage(ChatColor.GOLD + "Set fly mode " + ChatColor.RED + "disabled" + ChatColor.GOLD + " for " + ChatColor.DARK_RED + player.getDisplayName());
+                player.sendMessage(ChatColor.GRAY + "Flight " + ChatColor.RED + "Disabled");
                 player.setAllowFlight(false);
             } else if (!list_of_flying_people.contains(player)) {
                 list_of_flying_people.add(player);
-                player.sendMessage(ChatColor.GOLD + "Set fly mode " + ChatColor.RED + "enabled" + ChatColor.GOLD + " for " + ChatColor.DARK_RED + player.getDisplayName());
+                player.sendMessage(ChatColor.GRAY + "Flight " + ChatColor.GREEN + "Enabled");
                 player.setAllowFlight(true);
             }
         } else {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "You do not have permission to use this command");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command");
         }
         return true;
     }

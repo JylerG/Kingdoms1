@@ -17,9 +17,9 @@ public class Feed implements CommandExecutor {
         }
         if (player.hasPermission("kingdoms.feed")) {
             player.setFoodLevel(25);
-            player.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "You filled your hunger completely");
+            player.sendMessage(ChatColor.GREEN + "You filled your hunger completely");
         } else {
-            player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "You do not have permission to use this command");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command");
         }
         return true;
     }

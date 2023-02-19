@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinEvent implements Listener {
 
-    Kingdoms plugin;
+    private Kingdoms plugin;
 
     public JoinEvent(Kingdoms plugin) {
         this.plugin = plugin;
@@ -17,8 +17,8 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        for (int i = 0; i < plugin.invisiblePlayers.size(); i++) {
-            p.hidePlayer(plugin, plugin.invisiblePlayers.get(i));
+        for (int i = 0; i < plugin.getInvisiblePlayers().size(); i++) {
+            p.hidePlayer(plugin, plugin.getInvisiblePlayers().get(i));
         }
     }
 }
