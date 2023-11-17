@@ -11,9 +11,9 @@
 
     <name>Kingdoms</name>
 
-    <description>Plugins for the Kingdoms Project</description>
+    <description>Plugin for the Kingdoms Project</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <labyrinth.version>1.8.2</labyrinth.version>
         <enterprise.version>1.5</enterprise.version>
         <panther.version>1.0.1.R1-SNAPSHOT</panther.version>
@@ -24,6 +24,14 @@
     <build>
         <finalName>Kingdoms</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <outputDirectory>C:\Users\pfram\OneDrive\Desktop\Kingdoms Server\plugins</outputDirectory>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -49,14 +57,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <outputDirectory>C:\Users\pfram\OneDrive\Desktop\Kingdoms Server\plugins</outputDirectory>
-                </configuration>
-            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -72,10 +72,6 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>jeff-media-public</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
-        </repository>
-        <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
@@ -87,21 +83,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>MorePersistentDataTypes</artifactId>
-            <version>2.3.1</version>
-            <scope>compile</scope>
+            <groupId>com.github.ItsWagPvP</groupId>
+            <artifactId>EconomyPlus</artifactId>
+            <version>4.9</version>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>1.18-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>23.0.0</version>
+            <version>23.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
